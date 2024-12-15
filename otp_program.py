@@ -16,17 +16,13 @@ def send_email(email, otp):
         raise ValueError("Invalid email address.")
 
     # Create the email content
-    message = EmailMessage()
-    message.set_content(f"Your One-Time Password (OTP) is: {otp}")
-    message['Subject'] = 'Your OTP'
-    message['From'] = 'youremail@example.com'  # Replace with your email
-    message['To'] = email
+    message = f"Your One-Time Password (OTP) is: {otp}"
 
     # Send the email using SMTP
     try:
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
             smtp.login('youremail@example.com', 'yourpassword')  # Replace with your credentials
-            smtp.send_message(message)
+            smtp.sendmail("your eamil",email,message)
             print(f"OTP sent to {email}")
     except smtplib.SMTPException as e:
         print(f"Error sending email: {e}")
