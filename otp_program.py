@@ -1,5 +1,5 @@
+"""Required moduled installed"""
 import smtplib
-from email.message import EmailMessage
 import random
 from validate_email_address import validate_email
 
@@ -11,17 +11,15 @@ def generate_otp(length=6):
 
 def send_email(email, otp):
     """Send OTP to the specified email address."""
-    # Validate the email address
+    
     if not validate_email(email):
         raise ValueError("Invalid email address.")
 
-    # Create the email content
     message = f"Your One-Time Password (OTP) is: {otp}"
 
-    # Send the email using SMTP
     try:
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-            smtp.login('youremail@example.com', 'yourpassword')  # Replace with your credentials
+            smtp.login('youremail@example.com', 'yourpassword')  
             smtp.sendmail("your eamil",email,message)
             print(f"OTP sent to {email}")
     except smtplib.SMTPException as e:
@@ -31,7 +29,7 @@ def main():
     """Main function to generate and send OTP."""
     email = input("Enter the recipient's email address: ")
     try:
-        otp = generate_otp(length=6)  # Generate a 6-digit OTP
+        otp = generate_otp(length=6) 
         send_email(email, otp)
     except ValueError as ve:
         print(f"Error: {ve}")
