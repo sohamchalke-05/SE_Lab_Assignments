@@ -12,6 +12,7 @@ def generate_otp(length=6):
 def send_email(email, otp):
     """Send OTP to the specified email address."""
     
+    
     if not validate_email(email):
         raise ValueError("Invalid email address.")
 
